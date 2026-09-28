@@ -1,0 +1,22 @@
+{
+  "name": "plus-ai",
+  "owner": {
+    "name": "Plus AI",
+    "email": "support@plusai.com",
+    "url": "https://plusai.com"
+  },
+  "metadata": {
+    "description": "The official Plus AI plugin: create and edit PowerPoint presentations from a prompt."
+  },
+  "plugins": [
+    {
+      "name": "plus-ai",
+      "displayName": "Plus AI",
+      "description": "Turn a prompt into a professionally designed, fully editable PowerPoint presentation with the Plus AI Presentation Agent.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "source": "./",
+      "homepage": "https://plusai.com"
+    }
+  ]
+}

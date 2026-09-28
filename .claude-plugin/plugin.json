@@ -1,0 +1,26 @@
+{
+  "name": "plus-ai",
+  "displayName": "Plus AI",
+  "version": "1.0.0",
+  "description": "Turn a prompt into a professionally designed, fully editable PowerPoint presentation with the Plus AI Presentation Agent.",
+  "author": {
+    "name": "Plus AI",
+    "email": "support@plusai.com",
+    "url": "https://plusai.com"
+  },
+  "homepage": "https://plusai.com",
+  "repository": "https://github.com/PlusDocs/plus-ai-mcp",
+  "license": "MIT",
+  "keywords": [
+    "plus-ai",
+    "presentation",
+    "presentations",
+    "ai-presentation",
+    "powerpoint",
+    "pptx",
+    "slides",
+    "slide-deck",
+    "pitch-deck",
+    "mcp"
+  ]
+}
