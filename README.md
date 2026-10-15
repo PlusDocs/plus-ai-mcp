@@ -47,7 +47,7 @@ You don't need an API key: you sign in with your Plus AI account the first time 
 
 ## Install
 
-**ChatGPT.** Open [Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Name it Plus AI, enter `https://mcp.plusai.com/` as the server URL with OAuth authentication, and create it. In a chat, type `@` and pick Plus AI. If you don't see the option, turn on developer mode in ChatGPT's settings; in a workspace, an admin enables it first. See [OpenAI's guide](https://developers.openai.com/apps-sdk/deploy/connect-chatgpt).
+**ChatGPT.** Open [Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Name it Plus AI, enter `https://mcp.plusai.com/` as the server URL with OAuth authentication, and create it. In a chat, type `@` and pick Plus AI. See [OpenAI's guide](https://developers.openai.com/apps-sdk/deploy/connect-chatgpt).
 
 **Claude** (claude.ai, desktop and mobile). Go to **Customize → Connectors**, select **+ Add**, then **Add custom connector**. Name it Plus AI, enter `https://mcp.plusai.com/`, and select **Continue**, then **Add**. In a chat, turn it on under **+ → Connectors**. On Team and Enterprise plans, an Owner adds it under **Organization settings → Connectors** and each member selects **Connect**. See [Anthropic's guide](https://support.claude.com/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
 
