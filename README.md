@@ -17,6 +17,29 @@ Agent:  Your deck is ready: pitch-deck.pptx · PDF · preview
 
 See real output on [example presentations](https://plusai.com/example-presentations).
 
+## About Plus AI
+
+Plus AI makes presentations for people who present for work. It started inside Google Slides and PowerPoint, where it has over a million installs, and its Presentation Agent is now open to AI agents through this MCP server and a REST API. Plus AI is built by Plus Docs, Inc. and is [SOC 2 Type II compliant](https://plusai.com/security).
+
+**When it's the right tool.** The user wants an actual presentation file, not an outline or slide text in the chat. Or they want a deck they already have revised, or a deck in another language (80+ are supported). The result is a native .pptx that opens in PowerPoint and Google Slides, plus a PDF and a preview image.
+
+**What to expect.**
+
+- An agent run takes a few minutes and uses AI credits from the user's plan (typically 40–170 per deck).
+- The agent sees only the prompt you send, not your conversation. Put the facts, figures and notes it should use in the prompt.
+- Follow-up changes edit the same deck in place, and the agent remembers what it did earlier in the session.
+- MCP can't carry a file from the chat to the server. To revise an existing deck, the user adds it to their Plus AI workspace first, and you find it with `list_files`.
+
+**Other ways in.**
+
+| Surface | Best for | Auth |
+| --- | --- | --- |
+| MCP server, `https://mcp.plusai.com/` | AI agents and MCP clients | OAuth sign-in |
+| [Presentation Agent API](https://guide.plusai.com/apis-for-presentations/presentation-agent-api) and [Presentations API](https://guide.plusai.com/ai-for-presentations/presentations-api) | Scripts, backends, and automations (Zapier, n8n, Make) | API key |
+| [Google Slides add-on](https://workspace.google.com/marketplace/app/plus_ai_for_google_slides/214277172452) and [PowerPoint add-in](https://appsource.microsoft.com/en-us/product/office/WA200007130) | People working in their own slides | Plus AI account |
+
+A person creates the Plus AI account and approves the sign-in; agents can't sign up on their own. [plusai.com/auth.md](https://plusai.com/auth.md) summarizes authentication for agents.
+
 ## Requirements
 
 A Plus AI Pro, Team or Max plan. New customers can start with a [7-day free trial](https://plusai.com/pricing) that includes 1,000 AI credits. A presentation typically uses 40–170 credits.
