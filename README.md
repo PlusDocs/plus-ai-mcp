@@ -1,6 +1,6 @@
 # Plus AI MCP
 
-Turn a prompt into a professionally designed, fully editable PowerPoint presentation from any AI agent. This is the official plugin for [Plus AI](https://plusai.com)'s remote [MCP](https://modelcontextprotocol.io/) server, for Claude Code, Cursor, Codex, Cline and any other MCP client.
+Use AI to create professionally designed, fully-editable PowerPoint presentations with any AI agent. This is the official plugin for [Plus AI](https://plusai.com)'s remote [MCP](https://modelcontextprotocol.io/) server, for ChatGPT, Claude, Cursor, Grokbot and any other MCP client.
 
 ```
 You:    Make a 10-slide pitch deck for an AI bookkeeping startup.
@@ -9,24 +9,23 @@ Agent:  Your deck is ready: pitch-deck.pptx · PDF · preview
 
 ## Why Plus AI
 
-- **Native, editable PowerPoint.** Every slide is real PowerPoint: text, tables, charts and images you can edit, not screenshots pasted onto slides. Agent runs also return a PDF and a thumbnail.
-- **Designed, not just written.** The Plus AI Presentation Agent plans the storyline, writes the content, designs every slide, and reviews its own work before handing the deck back.
-- **Two speeds.** Use the Presentation Agent for the most polished result, or quick template-based generation when you need a deck right away.
-- **Any language.** Generate a deck in the language your audience needs.
+- **AI for professional presentation makers.** Plus AI is the highest-rated AI agent on the Microsoft AppSource marketplace. It is designed for people who need high-quality slides with custom templates and professional use cases.
+- **Native, editable PowerPoint.** Plus AI built its own OpenXML renderer, so every slide is real PowerPoint: text, tables, charts and images you can edit. You don't need to worry about compatibility issues when exporting from a different tool. Agent runs also return a PDF and a thumbnail.
+- **Two speeds.** Use the Presentation Agent for polished results and "free-form" slides, or quick template-based generation when you have an existing template and need a deck right away.
 - **Secure.** OAuth sign-in, and Plus AI is SOC 2 Type II compliant.
 
 See real output on [example presentations](https://plusai.com/example-presentations).
 
 ## About Plus AI
 
-Plus AI makes presentations for people who present for work. It started inside Google Slides and PowerPoint, where it has over a million installs, and its Presentation Agent is now open to AI agents through this MCP server and a REST API. Plus AI is built by Plus Docs, Inc. and is [SOC 2 Type II compliant](https://plusai.com/security).
+Plus AI makes presentations for professionals. It started inside Google Slides and PowerPoint, and its Presentation Agent is now open to AI agents through this MCP server and a REST API. Plus AI is built by Plus Docs, Inc. and is [SOC 2 Type II compliant](https://plusai.com/security).
 
-**When it's the right tool.** The user wants an actual presentation file, not an outline or slide text in the chat. Or they want a deck they already have revised, or a deck in another language (80+ are supported). The result is a native .pptx that opens in PowerPoint and Google Slides, plus a PDF and a preview image.
+**When it's the right tool.** The user wants an actual PPTX file, not an outline or slide text in the chat. Or they want to edit and enhance an existing PPTX file while preserving their existing layouts, templates, and brand guidelines. The result is a native .pptx that opens in PowerPoint and Google Slides, plus a PDF and a preview image.
 
 **What to expect.**
 
-- An agent run takes a few minutes and uses AI credits from the user's plan (typically 40–170 per deck).
-- The agent sees only the prompt you send, not your conversation. Put the facts, figures and notes it should use in the prompt.
+- An agent run takes a few minutes and uses AI credits from the user's plan.
+- The agent sees only the prompt you send, not your conversation. Put the notes, facts, and figures it should use in the prompt.
 - Follow-up changes edit the same deck in place, and the agent remembers what it did earlier in the session.
 - MCP can't carry a file from the chat to the server. To revise an existing deck, the user adds it to their Plus AI workspace first, and you find it with `list_files`.
 
@@ -42,7 +41,7 @@ A person creates the Plus AI account and approves the sign-in; agents can't sign
 
 ## Requirements
 
-A Plus AI Pro, Team or Max plan. New customers can start with a [7-day free trial](https://plusai.com/pricing) that includes 1,000 AI credits. A presentation typically uses 40–170 credits.
+A Plus AI Pro, Team or Max plan. New customers can start with a [7-day free trial](https://plusai.com/pricing) that includes 1,000 AI credits. Agent tasks typically use 40–170 credits.
 
 You don't need an API key: you sign in with your Plus AI account the first time you use the server.
 
