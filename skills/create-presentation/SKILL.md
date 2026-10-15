@@ -61,6 +61,8 @@ To revise a PowerPoint the agent didn't make in this conversation, pass its file
 2. **The user attached the .pptx in this chat** (ChatGPT): call `upload_file` with the attachment as `file`. The server uploads it and returns a `fileId`.
 3. **The deck is already in the user's Plus AI workspace:** find it with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back.
 
+The upload command needs HTTPS access to `s3.us-east-2.amazonaws.com`. If it fails because your sandbox blocks that host (as Claude.ai's code sandbox does by default), tell the user. They can add the domain to the sandbox's allowed domains (in Claude.ai: Settings → Capabilities, or Organization settings → Capabilities on Team and Enterprise), or use the fallback below.
+
 If none of these works, for example in a client that can't pass attachments to tools, ask the user to drop the .pptx on the New presentation page at https://app.plusdocs.com ("Start with an existing PowerPoint"), then find it with `list_files`. Or offer to create a new deck from its content instead.
 
 - Use only ids from `upload_file`, `list_files` or the user, and never invent one.
