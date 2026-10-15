@@ -16,13 +16,15 @@ The `plus-ai` MCP server turns a prompt into a finished, designed presentation. 
 
 ## Tools
 
-The server has three tools:
+The server has five tools:
 
 | Tool | Use it for | Time |
 | --- | --- | --- |
-| `create_presentation_with_agent` | The default, for the most polished deck. The Presentation Agent plans the storyline, writes the content, designs every slide, and reviews its own work. It can also revise an existing deck. | A few minutes |
+| `create_presentation_with_agent` | The default, for the most polished deck. The Presentation Agent plans the storyline, writes the content, designs every slide, and reviews its own work. With `pptx_file_id` it revises a deck from the user's workspace. | Returns within about 45 seconds; the deck usually takes a few minutes |
+| `continue_presentation_agent_session` | Every follow-up change to a deck the agent made ("shorten slide 3", "add a closing slide"). Edits the same deck in place. | Same as above |
+| `get_presentation_agent_session` | Waiting for an agent session that returned status `RUNNING`. | Waits up to about 45 seconds per call |
+| `list_files` | Finding a PowerPoint in the user's Plus AI workspace to revise. | Instant |
 | `create_presentation` | Quick, template-based generation. Use it when the user needs the deck right away, or asks for a quick draft. Takes a slide count (1–30). | Faster |
-| `get_presentation_agent_session` | Checking on an agent session that was still running when `create_presentation_with_agent` returned. | Instant |
 
 ## Write a good prompt
 
@@ -35,21 +37,37 @@ Plus AI only knows what you put in the prompt, so pass along everything useful f
 
 Set `language` only when the user wants a language different from the one the prompt is written in. The agent's default, `auto`, matches the prompt.
 
-## Handle long-running agent sessions
+## Wait for the agent
 
-`create_presentation_with_agent` waits several minutes for the deck. If the agent isn't done by then, the tool returns a `sessionId` with status `RUNNING`. This is not a failure — the agent keeps working.
+`create_presentation_with_agent` and `continue_presentation_agent_session` return within about 45 seconds, so the client never times out. The agent usually needs a few minutes, so most calls return a `sessionId` with status `RUNNING`. That's expected, not a failure: the agent keeps working.
 
-1. Tell the user the deck is still being built.
-2. Call `get_presentation_agent_session` with the `sessionId` after a minute or two, and repeat until it returns download links or an error.
-3. Do not call `create_presentation_with_agent` again for the same request. That starts a second deck and uses more of the user's credits.
+1. Tell the user the deck is being built.
+2. Call `get_presentation_agent_session` with the `sessionId` right away. Each call waits up to about 45 seconds for the agent, so there's no need to pause between calls. Keep calling it while the status is `RUNNING`.
+3. Don't call `create_presentation_with_agent` or `continue_presentation_agent_session` again for the same request. That starts another run and uses more of the user's credits.
 
-## Edit an existing deck
+## Change a deck the agent made
 
-Pass `pptx_file_id` to `create_presentation_with_agent` to have the agent revise a deck instead of starting over. File ids come from uploading a PowerPoint through the Plus AI API (the one step that needs an API key), so use only an id the user gives you, and never invent one. If the user wants to edit a deck and has no file id, explain that they can upload it through the Plus AI API (https://plusai.com/features/presentation-agent-api), or offer to create a new deck from its content instead. To take another pass at the same deck, call the tool again with the same `pptx_file_id` and a prompt describing the changes.
+For any follow-up change to a deck the agent made in this conversation, call `continue_presentation_agent_session` with its `sessionId` and a prompt describing the change. The agent remembers the conversation so far and edits the same deck; don't start a new deck for an edit. The result comes back the same way as a new deck: wait on `RUNNING` as above.
+
+- If the agent is still working on the previous change, the tool says so. Wait for it with `get_presentation_agent_session`, then send the next change.
+- Only the person who started a session can continue it.
+
+## Edit a deck from the user's workspace
+
+To revise a PowerPoint the agent didn't make in this conversation, pass its file id as `pptx_file_id` to `create_presentation_with_agent`.
+
+- Find the id with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back. Use only ids from `list_files` or from the user, and never invent one.
+- Files get into the workspace when the user drops a .pptx on the New presentation page at https://app.plusdocs.com ("Start with an existing PowerPoint"), or uploads one through the Plus AI API (https://plusai.com/features/presentation-agent-api, which needs an API key). This server can't upload files itself. If the deck isn't listed, ask the user to add it there, or offer to create a new deck from its content instead.
+- Decks the agent made don't appear in `list_files`. Continue those by `sessionId`.
 
 ## Present the result
 
-A finished deck returns `presentationUrl` (the PowerPoint file). Agent sessions also return `pdfUrl` and `thumbnailUrl`. Share the PowerPoint link, offer the PDF, and show the thumbnail if the client can display images. Summarize what the deck covers in a sentence or two. Mention that the file is a native, editable PowerPoint, so the user can open it in PowerPoint, Keynote or Google Slides and edit it.
+A finished deck returns `presentationUrl` (the PowerPoint file). Agent sessions also return `pdfUrl`, `thumbnailUrl`, and `lastAssistantMessage`, the agent's own summary of what it did. Many clients show the thumbnail (the first slide) inline.
+
+- Share the PowerPoint link and offer the PDF.
+- Pass on the agent's summary, including anything it says it couldn't check.
+- Mention that the file is a native, editable PowerPoint, so the user can open it in PowerPoint, Keynote or Google Slides and edit it.
+- Offer to make changes; they go through `continue_presentation_agent_session`.
 
 ## Errors
 

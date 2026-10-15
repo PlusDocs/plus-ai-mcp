@@ -2,6 +2,12 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.0.2
+
+- Two new server tools in the `create-presentation` skill and README: `continue_presentation_agent_session` for follow-up changes to a deck the agent made, and `list_files` for finding a PowerPoint in your Plus AI workspace to revise.
+- The agent tools now return within about 45 seconds, usually with status `RUNNING`, and `get_presentation_agent_session` waits on its own. The skill tells the agent to call it right away instead of waiting a minute or two, and not to start the request again.
+- The skill passes on the agent's own summary of each run (`lastAssistantMessage`), and explains how decks get into the workspace (the web app's "Start with an existing PowerPoint", or the API).
+
 ## 1.0.1
 
 - No API key needed: the MCP server now signs you in with your Plus AI account alone. The README and the `create-presentation` skill drop the API-key setup step. Uploading a deck to revise still uses an API key.

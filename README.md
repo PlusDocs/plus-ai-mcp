@@ -57,11 +57,13 @@ On first use, the client opens a Plus AI sign-in (Google or Microsoft).
 
 | Tool | What it does | Speed |
 | --- | --- | --- |
-| `create_presentation_with_agent` | The Plus AI Presentation Agent: plans, writes and designs the deck from a prompt, or revises an existing deck. Returns PowerPoint, PDF and a thumbnail. | A few minutes |
+| `create_presentation_with_agent` | The Plus AI Presentation Agent: plans, writes and designs the deck from a prompt, or revises a deck from your workspace. Returns PowerPoint, PDF and a thumbnail. | Returns within about 45 seconds; the deck takes a few minutes |
+| `continue_presentation_agent_session` | Makes a follow-up change to a deck the agent made, editing it in place. | Same as above |
+| `get_presentation_agent_session` | Waits for an agent run that was still going when its call returned, and returns the files when it's done. | Waits up to about 45 seconds per call |
+| `list_files` | Lists the PowerPoints in your Plus AI workspace, to pick one for the agent to revise. | Instant |
 | `create_presentation` | Quick, template-based generation from a prompt, a slide count (1–30) and a language. Returns a PowerPoint. | Faster |
-| `get_presentation_agent_session` | Checks on an agent run that was still going when its call returned, and returns the files when it's done. | Instant |
 
-To revise a deck you already have, upload it through the [Plus AI API](https://plusai.com/features/presentation-agent-api) and pass its file id to `create_presentation_with_agent`. The upload is the one step that uses an API key, which you can create at [app.plusdocs.com/api-settings](https://app.plusdocs.com/api-settings).
+To revise a deck you already have, drop the .pptx on the New presentation page at [app.plusdocs.com](https://app.plusdocs.com) ("Start with an existing PowerPoint"), then ask your agent to edit it: it finds the file with `list_files`. You can also upload it through the [Plus AI API](https://plusai.com/features/presentation-agent-api), which uses an API key from [app.plusdocs.com/api-settings](https://app.plusdocs.com/api-settings).
 
 ## Example prompts
 
