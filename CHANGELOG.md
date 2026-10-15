@@ -2,6 +2,11 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.0.3
+
+- New server tool, `upload_file`, in the `create-presentation` skill and README. Agents that can run shell commands (Claude Code, Codex, Cursor) upload a .pptx from the user's computer with a `curl` command the tool returns. In ChatGPT, a .pptx the user attaches to the chat is uploaded for them. The agent then revises it through `pptx_file_id`.
+- The skill explains each way to get a deck to the agent, and when to fall back to the web app.
+
 ## 1.0.2
 
 - Two new server tools in the `create-presentation` skill and README: `continue_presentation_agent_session` for follow-up changes to a deck the agent made, and `list_files` for finding a PowerPoint in your Plus AI workspace to revise.
