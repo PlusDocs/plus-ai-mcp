@@ -45,7 +45,7 @@ Set `language` only when the user wants a language different from the one the pr
 
 ## Edit an existing deck
 
-Pass `pptx_file_id` to `create_presentation_with_agent` to have the agent revise a deck instead of starting over. File ids come from uploading a PowerPoint through the Plus AI API, so use only an id the user gives you, and never invent one. If the user wants to edit a deck and has no file id, explain that they can upload it through the Plus AI API (https://plusai.com/features/presentation-agent-api), or offer to create a new deck from its content instead. To take another pass at the same deck, call the tool again with the same `pptx_file_id` and a prompt describing the changes.
+Pass `pptx_file_id` to `create_presentation_with_agent` to have the agent revise a deck instead of starting over. File ids come from uploading a PowerPoint through the Plus AI API (the one step that needs an API key), so use only an id the user gives you, and never invent one. If the user wants to edit a deck and has no file id, explain that they can upload it through the Plus AI API (https://plusai.com/features/presentation-agent-api), or offer to create a new deck from its content instead. To take another pass at the same deck, call the tool again with the same `pptx_file_id` and a prompt describing the changes.
 
 ## Present the result
 
@@ -53,6 +53,7 @@ A finished deck returns `presentationUrl` (the PowerPoint file). Agent sessions 
 
 ## Errors
 
-- **"API Key not found for user"** — the user hasn't created an API key yet. Send them to https://app.plusdocs.com/api-settings to create one, then retry.
-- **A 401 or authorization error from the Plus AI API** — the MCP server needs a Pro, Team or Max plan. Tell the user, and link https://plusai.com/pricing (new customers get a 7-day free trial).
+- **"requires a Pro, Team or Max plan"** — the user's Plus AI organization isn't on a plan that includes the MCP server. Tell the user, and pass on the upgrade link from the error (new customers can start a 7-day free trial at https://plusai.com/pricing).
+- **"sign-in has expired"** — the user needs to reconnect the Plus AI connector in their client, then retry.
+- **"run out of AI Agent credits"** — the organization has used this billing cycle's credits. Tell the user; don't retry.
 - **Anything else** — report the error message to the user. Every call uses Plus AI credits, so ask before retrying more than once.

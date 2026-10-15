@@ -19,8 +19,9 @@ See real output on [example presentations](https://plusai.com/example-presentati
 
 ## Requirements
 
-- **A Plus AI Pro, Team or Max plan.** New customers can start with a [7-day free trial](https://plusai.com/pricing) that includes 1,000 AI credits. A presentation typically uses 40–170 credits.
-- **An API key on your account.** Create one once at [app.plusdocs.com/api-settings](https://app.plusdocs.com/api-settings). You never paste it anywhere: the MCP server uses it for you after you sign in.
+A Plus AI Pro, Team or Max plan. New customers can start with a [7-day free trial](https://plusai.com/pricing) that includes 1,000 AI credits. A presentation typically uses 40–170 credits.
+
+You don't need an API key: you sign in with your Plus AI account the first time you use the server.
 
 ## Install
 
@@ -60,7 +61,7 @@ On first use, the client opens a Plus AI sign-in (Google or Microsoft).
 | `create_presentation` | Quick, template-based generation from a prompt, a slide count (1–30) and a language. Returns a PowerPoint. | Faster |
 | `get_presentation_agent_session` | Checks on an agent run that was still going when its call returned, and returns the files when it's done. | Instant |
 
-To revise a deck you already have, upload it through the [Plus AI API](https://plusai.com/features/presentation-agent-api) and pass its file id to `create_presentation_with_agent`.
+To revise a deck you already have, upload it through the [Plus AI API](https://plusai.com/features/presentation-agent-api) and pass its file id to `create_presentation_with_agent`. The upload is the one step that uses an API key, which you can create at [app.plusdocs.com/api-settings](https://app.plusdocs.com/api-settings).
 
 ## Example prompts
 

@@ -13,7 +13,7 @@
       "name": "plus-ai",
       "displayName": "Plus AI",
       "description": "Turn a prompt into a professionally designed, fully editable PowerPoint presentation with the Plus AI Presentation Agent.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "category": "productivity",
       "source": "./",
       "homepage": "https://plusai.com"
