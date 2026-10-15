@@ -1,6 +1,6 @@
 ---
 name: create-presentation
-description: Create or edit PowerPoint presentations with the Plus AI MCP tools. Use when the user asks for a slide deck, presentation, pitch deck, or PowerPoint, or wants an existing Plus AI deck revised, and the plus-ai MCP server is connected.
+description: Create or edit PowerPoint presentations with the Plus AI MCP tools. Use when the user asks for a slide deck, presentation, pitch deck, or PowerPoint, or wants an existing deck (.pptx) revised, and the plus-ai MCP server is connected.
 argument-hint: [describe the presentation you need]
 ---
 
@@ -16,13 +16,14 @@ The `plus-ai` MCP server turns a prompt into a finished, designed presentation. 
 
 ## Tools
 
-The server has five tools:
+The server has six tools:
 
 | Tool | Use it for | Time |
 | --- | --- | --- |
 | `create_presentation_with_agent` | The default, for the most polished deck. The Presentation Agent plans the storyline, writes the content, designs every slide, and reviews its own work. With `pptx_file_id` it revises a deck from the user's workspace. | Returns within about 45 seconds; the deck usually takes a few minutes |
 | `continue_presentation_agent_session` | Every follow-up change to a deck the agent made ("shorten slide 3", "add a closing slide"). Edits the same deck in place. | Same as above |
 | `get_presentation_agent_session` | Waiting for an agent session that returned status `RUNNING`. | Waits up to about 45 seconds per call |
+| `upload_file` | Putting a PowerPoint the user has into their Plus AI workspace, so the agent can revise it. | Seconds |
 | `list_files` | Finding a PowerPoint in the user's Plus AI workspace to revise. | Instant |
 | `create_presentation` | Quick, template-based generation. Use it when the user needs the deck right away, or asks for a quick draft. Takes a slide count (1–30). | Faster |
 
@@ -52,12 +53,18 @@ For any follow-up change to a deck the agent made in this conversation, call `co
 - If the agent is still working on the previous change, the tool says so. Wait for it with `get_presentation_agent_session`, then send the next change.
 - Only the person who started a session can continue it.
 
-## Edit a deck from the user's workspace
+## Edit a deck the user already has
 
-To revise a PowerPoint the agent didn't make in this conversation, pass its file id as `pptx_file_id` to `create_presentation_with_agent`.
+To revise a PowerPoint the agent didn't make in this conversation, pass its file id as `pptx_file_id` to `create_presentation_with_agent`. The agent edits a copy, so the user's original is never changed. Get the id one of these ways:
 
-- Find the id with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back. Use only ids from `list_files` or from the user, and never invent one.
-- Files get into the workspace when the user drops a .pptx on the New presentation page at https://app.plusdocs.com ("Start with an existing PowerPoint"), or uploads one through the Plus AI API (https://plusai.com/features/presentation-agent-api, which needs an API key). This server can't upload files itself. If the deck isn't listed, ask the user to add it there, or offer to create a new deck from its content instead.
+1. **The file is on this computer and you can run shell commands** (Claude Code, Codex, Cursor and similar): call `upload_file` with the file's path as `file_name`. It returns a `fileId` and an `upload.command`. Run that command in a POSIX shell (bash, zsh) within 5 minutes, then pass the `fileId` as `pptx_file_id`. If the command fails, call `upload_file` again for a fresh one.
+2. **The user attached the .pptx in this chat** (ChatGPT): call `upload_file` with the attachment as `file`. The server uploads it and returns a `fileId`.
+3. **The deck is already in the user's Plus AI workspace:** find it with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back.
+
+If none of these works, for example in a client that can't pass attachments to tools, ask the user to drop the .pptx on the New presentation page at https://app.plusdocs.com ("Start with an existing PowerPoint"), then find it with `list_files`. Or offer to create a new deck from its content instead.
+
+- Use only ids from `upload_file`, `list_files` or the user, and never invent one.
+- Uploads accept .pptx files up to 100 MB and are kept for 8 days. A legacy .ppt has to be saved as .pptx first.
 - Decks the agent made don't appear in `list_files`. Continue those by `sessionId`.
 
 ## Present the result
