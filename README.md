@@ -9,7 +9,7 @@ Agent:  Your deck is ready: pitch-deck.pptx · PDF · preview
 
 ## Why Plus AI
 
-- **AI for professional presentation makers.** Plus AI is the highest-rated AI agent on the Microsoft AppSource marketplace. It is designed for people who need high-quality slides with custom templates and professional use cases.
+- **AI for professional presentation makers.** Plus AI is the highest-rated AI agent on the [Microsoft Marketplace](https://marketplace.microsoft.com/en-us/search/products?page=1&search=AI%20presentation). It is designed for people who need high-quality slides with custom templates and professional use cases.
 - **Native, editable PowerPoint.** Plus AI built its own OpenXML renderer, so every slide is real PowerPoint: text, tables, charts and images you can edit. You don't need to worry about compatibility issues when exporting from a different tool. Agent runs also return a PDF and a thumbnail.
 - **Two speeds.** Use the Presentation Agent for polished results and "free-form" slides, or quick template-based generation when you have an existing template and need a deck right away.
 - **Secure.** OAuth sign-in, and Plus AI is SOC 2 Type II compliant.
@@ -46,6 +46,10 @@ A Plus AI Pro, Team or Max plan. New customers can start with a [7-day free tria
 You don't need an API key: you sign in with your Plus AI account the first time you use the server.
 
 ## Install
+
+**ChatGPT.** Open [Plugins](https://chatgpt.com/plugins), select **+**, then **Add custom MCP server**. Name it Plus AI, enter `https://mcp.plusai.com/` as the server URL with OAuth authentication, and create it. In a chat, type `@` and pick Plus AI. If you don't see the option, turn on developer mode in ChatGPT's settings; in a workspace, an admin enables it first. See [OpenAI's guide](https://developers.openai.com/apps-sdk/deploy/connect-chatgpt).
+
+**Claude** (claude.ai, desktop and mobile). Go to **Customize → Connectors**, select **+ Add**, then **Add custom connector**. Name it Plus AI, enter `https://mcp.plusai.com/`, and select **Continue**, then **Add**. In a chat, turn it on under **+ → Connectors**. On Team and Enterprise plans, an Owner adds it under **Organization settings → Connectors** and each member selects **Connect**. See [Anthropic's guide](https://support.claude.com/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
 
 **Claude Code.** Install the plugin, which adds the MCP server and the `create-presentation` skill:
 
