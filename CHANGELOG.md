@@ -5,7 +5,7 @@ All notable changes to this plugin are documented here.
 ## 1.0.3
 
 - New server tool, `upload_file`, in the `create-presentation` skill and README. Agents that can run shell commands (Claude Code, Codex, Cursor) upload a .pptx from the user's computer with a `curl` command the tool returns. In ChatGPT, a .pptx the user attaches to the chat is uploaded for them. The agent then revises it through `pptx_file_id`.
-- The skill explains each way to get a deck to the agent, and when to fall back to the web app.
+- The skill explains each way to get a deck to the agent, and when to fall back to the web app. It also says uploads need HTTPS access to `s3.us-east-2.amazonaws.com`, and how to allow it in Claude.ai's code sandbox.
 
 ## 1.0.2
 
