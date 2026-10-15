@@ -96,6 +96,8 @@ To revise a deck you already have, ask your agent to edit it:
 - **ChatGPT:** attach the .pptx to the chat and say what to change.
 - **Other clients:** drop the .pptx on the New presentation page at [app.plusdocs.com](https://app.plusdocs.com) ("Start with an existing PowerPoint"), then ask your agent to edit it; it finds the file with `list_files`.
 
+Uploading from an agent needs HTTPS access to `s3.us-east-2.amazonaws.com`, where the file is sent. Agents on your own machine usually have it. Sandboxed agents may not: in Claude.ai, add that domain to the code execution sandbox's allowed domains under Settings → Capabilities (on Team and Enterprise plans, an owner does this in Organization settings → Capabilities).
+
 The agent edits a copy, so your original file is never changed.
 
 ## Example prompts
