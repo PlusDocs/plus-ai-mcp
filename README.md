@@ -88,7 +88,10 @@ On first use, the client opens a Plus AI sign-in (Google or Microsoft).
 | `get_presentation_agent_session` | Waits for an agent run that was still going when its call returned, and returns the files when it's done. | Waits up to about 45 seconds per call |
 | `upload_file` | Uploads a PowerPoint (.pptx, up to 100 MB) for the agent to revise: a file on your computer, or one you attach in ChatGPT. | Seconds |
 | `list_files` | Lists the PowerPoints in your Plus AI workspace, to pick one for the agent to revise. | Instant |
+| `open_presentation` | Opens the presentation panel for a session ID, or a picker of your recent PowerPoints when called without one. Read-only; never starts generation. | Instant |
 | `create_presentation` | Quick, template-based generation from a prompt, a slide count (1–30) and a language. Returns a PowerPoint. | Faster |
+
+In clients that support [MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview) and in ChatGPT, decks open in a presentation panel instead of only a link. You can page through the slides, download the PowerPoint or PDF, and select a slide to ask for a change; the request is drafted in your chat for you to send, so the panel never spends credits on its own. Other clients get the same text result and a thumbnail.
 
 To revise a deck you already have, ask your agent to edit it:
 
