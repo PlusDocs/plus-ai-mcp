@@ -16,7 +16,7 @@ The `plus-ai` MCP server turns a prompt into a finished, designed presentation. 
 
 ## Tools
 
-The server has six tools:
+The server has seven tools:
 
 | Tool | Use it for | Time |
 | --- | --- | --- |
@@ -25,6 +25,7 @@ The server has six tools:
 | `get_presentation_agent_session` | Waiting for an agent session that returned status `RUNNING`. | Waits up to about 45 seconds per call |
 | `upload_file` | Putting a PowerPoint the user has into their Plus AI workspace, so the agent can revise it. | Seconds |
 | `list_files` | Finding a PowerPoint in the user's Plus AI workspace to revise. | Instant |
+| `open_presentation` | Showing the presentation panel for a session id, or a picker of recent PowerPoints. Read-only; it never starts or edits a deck. | Instant |
 | `create_presentation` | Quick, template-based generation. Use it when the user needs the deck right away, or asks for a quick draft. Takes a slide count (1–30). | Faster |
 
 ## Write a good prompt
@@ -70,6 +71,8 @@ If none of these works, for example in a client that can't pass attachments to t
 - Decks the agent made don't appear in `list_files`. Continue those by `sessionId`.
 
 ## Present the result
+
+In clients that support MCP Apps and in ChatGPT, creating or editing a deck opens a presentation panel with the slides and download buttons. Don't repeat what the panel shows. Keep calling `get_presentation_agent_session` while the status is `RUNNING`; it doesn't open a second panel. Call `open_presentation` with a `sessionId` only when the user asks to see a deck again. When the user selects a slide in the panel, you receive its session, slide number and text; treat that as context for their next request and don't start an edit until they ask for one.
 
 A finished deck returns `presentationUrl` (the PowerPoint file). Agent sessions also return `pdfUrl`, `thumbnailUrl`, and `lastAssistantMessage`, the agent's own summary of what it did. Many clients show the thumbnail (the first slide) inline.
 

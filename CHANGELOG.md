@@ -2,6 +2,13 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.0.4
+
+- New server tool, `open_presentation`, and a presentation panel. In clients that support MCP Apps (and in ChatGPT), a deck the agent creates or edits opens in an inline viewer: flip through the slides, download the PowerPoint or PDF, and select a slide to ask for a change. Called without a session ID, the tool opens a picker of your recent PowerPoints. Other clients still get the text result and thumbnail.
+- The panel never starts an edit on its own: quick actions draft the request in your chat for you to send, so nothing is billed until you do.
+- Every tool now declares its safety hints. `continue_presentation_agent_session` is marked destructive, because it edits the deck in place, and `open_presentation`, `list_files` and `get_presentation_agent_session` are read-only.
+- The `create-presentation` skill and README now list seven tools, and tell the agent to show the panel's result rather than poll for it.
+
 ## 1.0.3
 
 - New server tool, `upload_file`, in the `create-presentation` skill and README. Agents that can run shell commands (Claude Code, Codex, Cursor) upload a .pptx from the user's computer with a `curl` command the tool returns. In ChatGPT, a .pptx the user attaches to the chat is uploaded for them. The agent then revises it through `pptx_file_id`.
