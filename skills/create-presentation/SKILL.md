@@ -58,7 +58,7 @@ For any follow-up change to a deck the agent made in this conversation, call `co
 
 To revise a PowerPoint the agent didn't make in this conversation, pass its file id as `pptx_file_id` to `create_presentation_with_agent`. The agent edits a copy, so the user's original is never changed. Get the id one of these ways:
 
-1. **You can read the file and make HTTPS requests** (Claude Code, Codex, Cursor and similar): call `upload_file` with the file's name as `file_name` and its exact size in bytes as `size_bytes`. It returns a `fileId` and an `upload` object with a signed `url`, a `method` (`PUT`) and `headers`. Within 5 minutes, PUT the file's bytes to `upload.url`, sending exactly `upload.headers`, then pass the `fileId` as `pptx_file_id`. If the upload fails or the URL has expired, call `upload_file` again for a fresh one.
+1. **You can read the file and make HTTPS requests** (Claude Code, Codex, Cursor and similar): call `upload_file` with the file's name as `file_name`. It returns a `fileId` and an `upload` object with a signed `url`, a `method` (`PUT`) and `headers`. Within 5 minutes, PUT the file's bytes to `upload.url`, sending `upload.headers`, then pass the `fileId` as `pptx_file_id`. If the upload fails or the URL has expired, call `upload_file` again for a fresh one.
 2. **The user attached the .pptx in this chat and the client passes attachments to tools** (ChatGPT): call `upload_file` with the attachment as `file`. The server uploads it and returns a `fileId`.
 3. **The deck is already in the user's Plus AI workspace:** find it with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back.
 

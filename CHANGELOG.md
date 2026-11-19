@@ -4,7 +4,7 @@ All notable changes to this plugin are documented here.
 
 ## 1.0.5
 
-- `upload_file` no longer returns a shell command. Given the file's name and exact size (`file_name`, `size_bytes`), it returns a signed upload URL, the method (`PUT`) and the headers to send, as data; the agent PUTs the file's bytes there. The URL accepts only a .pptx of exactly that size. The `create-presentation` skill and README describe the new steps.
+- `upload_file` no longer returns a shell command. Given the file's name (`file_name`), it returns a signed upload URL, the method (`PUT`) and the headers to send, as data; the agent PUTs the file's bytes there. The `create-presentation` skill and README describe the new steps.
 - Every tool now carries its title in its annotations too, for clients that read display names from there.
 
 ## 1.0.4
