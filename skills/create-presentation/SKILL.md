@@ -58,11 +58,11 @@ For any follow-up change to a deck the agent made in this conversation, call `co
 
 To revise a PowerPoint the agent didn't make in this conversation, pass its file id as `pptx_file_id` to `create_presentation_with_agent`. The agent edits a copy, so the user's original is never changed. Get the id one of these ways:
 
-1. **The file is on this computer and you can run shell commands** (Claude Code, Codex, Cursor and similar): call `upload_file` with the file's path as `file_name`. It returns a `fileId` and an `upload.command`. Run that command in a POSIX shell (bash, zsh) within 5 minutes, then pass the `fileId` as `pptx_file_id`. If the command fails, call `upload_file` again for a fresh one.
-2. **The user attached the .pptx in this chat** (ChatGPT): call `upload_file` with the attachment as `file`. The server uploads it and returns a `fileId`.
+1. **You can read the file and make HTTPS requests** (Claude Code, Codex, Cursor and similar): call `upload_file` with the file's name as `file_name` and its exact size in bytes as `size_bytes`. It returns a `fileId` and an `upload` object with a signed `url`, a `method` (`PUT`) and `headers`. Within 5 minutes, PUT the file's bytes to `upload.url`, sending exactly `upload.headers`, then pass the `fileId` as `pptx_file_id`. If the upload fails or the URL has expired, call `upload_file` again for a fresh one.
+2. **The user attached the .pptx in this chat and the client passes attachments to tools** (ChatGPT): call `upload_file` with the attachment as `file`. The server uploads it and returns a `fileId`.
 3. **The deck is already in the user's Plus AI workspace:** find it with `list_files`. Use `name_contains` to search by name, and pass `nextCursor` back as `cursor` to look further back.
 
-The upload command needs HTTPS access to `s3.us-east-2.amazonaws.com`. If it fails because your sandbox blocks that host (as Claude.ai's code sandbox does by default), tell the user. They can add the domain to the sandbox's allowed domains (in Claude.ai: Settings → Capabilities, or Organization settings → Capabilities on Team and Enterprise), or use the fallback below.
+The upload needs HTTPS access to `s3.us-east-2.amazonaws.com`. If it fails because your sandbox blocks that host (as Claude.ai's code sandbox does by default), tell the user. They can add the domain to the sandbox's allowed domains (in Claude.ai: Settings → Capabilities, or Organization settings → Capabilities on Team and Enterprise), or use the fallback below.
 
 If none of these works, for example in a client that can't pass attachments to tools, ask the user to drop the .pptx on the New presentation page at https://app.plusdocs.com ("Start with an existing PowerPoint"), then find it with `list_files`. Or offer to create a new deck from its content instead.
 

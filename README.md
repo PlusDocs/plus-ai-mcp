@@ -27,7 +27,7 @@ Plus AI makes presentations for professionals. It started inside Google Slides a
 - An agent run takes a few minutes and uses AI credits from the user's plan.
 - The agent sees only the prompt you send, not your conversation. Put the notes, facts, and figures it should use in the prompt.
 - Follow-up changes edit the same deck in place, and the agent remembers what it did earlier in the session.
-- To revise a deck the user already has, upload it with `upload_file`. Agents that can run shell commands send the file with a `curl` command the tool returns; in ChatGPT, the user attaches the .pptx to the chat. In other clients, the user adds it to their Plus AI workspace first, and you find it with `list_files`.
+- To revise a deck the user already has, upload it with `upload_file`. Agents that can read the file PUT its bytes to a signed upload URL the tool returns; in ChatGPT, the user attaches the .pptx to the chat. In other clients, the user adds it to their Plus AI workspace first, and you find it with `list_files`.
 
 **Other ways in.**
 

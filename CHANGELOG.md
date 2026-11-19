@@ -2,6 +2,11 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.0.5
+
+- `upload_file` no longer returns a shell command. Given the file's name and exact size (`file_name`, `size_bytes`), it returns a signed upload URL, the method (`PUT`) and the headers to send, as data; the agent PUTs the file's bytes there. The URL accepts only a .pptx of exactly that size. The `create-presentation` skill and README describe the new steps.
+- Every tool now carries its title in its annotations too, for clients that read display names from there.
+
 ## 1.0.4
 
 - New server tool, `open_presentation`, and a presentation panel. In clients that support MCP Apps (and in ChatGPT), a deck the agent creates or edits opens in an inline viewer: flip through the slides, download the PowerPoint or PDF, and select a slide to ask for a change. Called without a session ID, the tool opens a picker of your recent PowerPoints. Other clients still get the text result and thumbnail.
